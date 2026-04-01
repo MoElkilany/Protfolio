@@ -7,8 +7,7 @@ const Skills = () => {
   const swiftSkills = [
     'Swift', 'SwiftUI', 'UIKit', 'MVVM / Clean Architecture', 'Combine / RxSwift', 
     'async/await (Swift Concurrency)', 'URLSession / Alamofire', 'Core Data / Realm',
-    'Swift Package Manager (SPM)', 'Firebase (Cloud Messaging, Crashlytics)', 
-    'Fastlane / CI-CD', 'XCTest', 'SonarQube'
+    'Swift Package Manager (SPM)', 'Fastlane / CI-CD', 'XCTest', 'SonarQube'
   ];
 
   const flutterSkills = [
@@ -83,7 +82,7 @@ const Skills = () => {
                 <FaApple className="text-textPrimary text-2xl" />
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-textPrimary">iOS (Swift)</h3>
+                <h3 className="text-xl font-semibold text-textPrimary">iOS (SwiftUI)</h3>
                 <p className="text-xs text-textMuted">Native Development</p>
               </div>
             </div>
