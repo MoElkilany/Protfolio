@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaGithub } from 'react-icons/fa';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -6,6 +8,8 @@ const Contact = () => {
     email: '',
     message: '',
   });
+
+  const [focused, setFocused] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,98 +24,146 @@ const Contact = () => {
   };
 
   const contactInfo = [
-    { icon: 'mail', label: 'Email', value: 'mohamedsayedelkilany@gmail.com' },
-    { icon: 'call', label: 'Phone', value: '+201010012244 / +201009986028' },
-    { icon: 'link', label: 'Links', links: [
-      { href: 'https://linkedin.com/in/mohamedelkilany', label: 'LinkedIn' },
-      { href: 'https://github.com/MoElkilany', label: 'GitHub' },
-    ]},
+    { icon: FaEnvelope, label: 'Email', value: 'mohamedsayedelkilany@gmail.com' },
+    { icon: FaPhone, label: 'Phone', value: '+201010012244' },
+    { icon: FaMapMarkerAlt, label: 'Location', value: 'New Cairo, Cairo, Egypt' },
   ];
 
-  return (
-    <section className="py-24 px-8 bg-surface-container-lowest" id="contact">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
-        <div className="space-y-8">
-          <h2 className="text-4xl md:text-5xl font-headline font-bold tracking-tight">
-            Let's Build the <span className="text-primary">Next Big Thing</span>
-          </h2>
-          <p className="text-lg text-on-surface-variant">
-            Ready to build high-quality mobile solutions or need an architectural deep-dive? Reach out and let's discuss your project.
-          </p>
-          
-          <div className="space-y-6 pt-4">
-            {contactInfo.map((item, index) => (
-              <div key={index} className="flex items-center gap-6">
-                <div className="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center border border-outline-variant/20">
-                  <span className="material-symbols-outlined text-primary">{item.icon}</span>
-                </div>
-                <div>
-                  <p className="text-xs font-label uppercase text-on-surface-variant tracking-widest">{item.label}</p>
-                  {item.value && <p className="text-lg font-medium">{item.value}</p>}
-                  {item.links && (
-                    <div className="flex gap-2">
-                      {item.links.map((link) => (
-                        <a key={link.label} href={link.href} className="hover:text-primary transition-colors">
-                          {link.label}
-                        </a>
-                      ))}
-                      <span className="text-outline-variant">/</span>
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+  const socialLinks = [
+    { href: 'https://linkedin.com/in/mohamedelkilany', icon: FaLinkedin, label: 'LinkedIn' },
+    { href: 'https://github.com/MoElkilany', icon: FaGithub, label: 'GitHub' },
+  ];
 
-        <div className="glass-card p-8 rounded-xl shadow-2xl">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <label className="font-label text-sm uppercase text-on-surface-variant" htmlFor="name">Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="w-full bg-surface-container-lowest border-none focus:ring-1 focus:ring-primary/40 rounded-lg py-3 px-4 text-on-surface transition-all"
-                  required
-                />
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  };
+
+  return (
+    <section className="py-28 px-6 bg-surface" id="contact">
+      <div className="max-w-6xl mx-auto">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+          variants={containerVariants}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-16"
+        >
+          <motion.div variants={itemVariants} className="space-y-8">
+            <h2 className="text-4xl md:text-5xl font-bold text-textPrimary tracking-tight">
+              Let's Work <span className="text-gradient">Together</span>
+            </h2>
+            <p className="text-lg text-textSecondary">
+              Ready to build high-quality mobile solutions or need an architectural deep-dive? Reach out and let's discuss your project.
+            </p>
+            
+            <div className="space-y-6 pt-4">
+              {contactInfo.map((item, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="flex items-center gap-4"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-surfaceElevated border border-border flex items-center justify-center">
+                    <item.icon className="text-primary text-lg" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-textMuted uppercase tracking-wider">{item.label}</p>
+                    <p className="text-textPrimary font-medium">{item.value}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="flex gap-4 pt-4">
+              {socialLinks.map((link, index) => (
+                <motion.a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 + index * 0.1 }}
+                  whileHover={{ scale: 1.1, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-12 h-12 rounded-xl bg-surfaceElevated border border-border flex items-center justify-center text-textSecondary hover:text-primary hover:border-primary transition-all duration-200"
+                >
+                  <link.icon className="text-lg" />
+                </motion.a>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div variants={itemVariants}>
+            <form onSubmit={handleSubmit} className="p-8 rounded-2xl bg-surfaceElevated border border-border space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="text-sm text-textMuted" htmlFor="name">Name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    onFocus={() => setFocused('name')}
+                    onBlur={() => setFocused(null)}
+                    className="w-full bg-surface border border-border rounded-lg py-3 px-4 text-textPrimary placeholder:text-textMuted focus:outline-none focus:border-primary transition-colors"
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm text-textMuted" htmlFor="email">Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    onFocus={() => setFocused('email')}
+                    onBlur={() => setFocused(null)}
+                    className="w-full bg-surface border border-border rounded-lg py-3 px-4 text-textPrimary placeholder:text-textMuted focus:outline-none focus:border-primary transition-colors"
+                    required
+                  />
+                </div>
               </div>
               <div className="space-y-2">
-                <label className="font-label text-sm uppercase text-on-surface-variant" htmlFor="email">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
+                <label className="text-sm text-textMuted" htmlFor="message">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
                   onChange={handleChange}
-                  className="w-full bg-surface-container-lowest border-none focus:ring-1 focus:ring-primary/40 rounded-lg py-3 px-4 text-on-surface transition-all"
+                  onFocus={() => setFocused('message')}
+                  onBlur={() => setFocused(null)}
+                  rows="5"
+                  className="w-full bg-surface border border-border rounded-lg py-3 px-4 text-textPrimary placeholder:text-textMuted focus:outline-none focus:border-primary transition-colors resize-none"
                   required
-                />
+                ></textarea>
               </div>
-            </div>
-            <div className="space-y-2">
-              <label className="font-label text-sm uppercase text-on-surface-variant" htmlFor="message">Message</label>
-              <textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                rows="5"
-                className="w-full bg-surface-container-lowest border-none focus:ring-1 focus:ring-primary/40 rounded-lg py-3 px-4 text-on-surface transition-all resize-none"
-                required
-              ></textarea>
-            </div>
-            <button
-              type="submit"
-              className="w-full py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary-container font-headline font-bold rounded-full text-lg shadow-lg hover:shadow-primary/20 transition-all"
-            >
-              Send Message
-            </button>
-          </form>
-        </div>
+              <motion.button
+                type="submit"
+                whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full py-4 bg-primary text-white font-semibold rounded-lg hover:bg-primaryHover transition-colors duration-200 glow-primary"
+              >
+                Send Message
+              </motion.button>
+            </form>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

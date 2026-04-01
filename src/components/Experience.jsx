@@ -1,22 +1,44 @@
+import { motion } from 'framer-motion';
+
 const experiences = [
   {
     period: 'July 2021 — Present',
     title: 'Senior Mobile Engineer',
     company: 'Sure International Technology, Saudia Arabia',
+    years: '4 years',
     description: 'Leading the development of mission-critical mobile applications for Saudi government and enterprise clients. Architected and delivered production-ready apps with focus on security, performance, and user experience.',
     highlights: [
       'DGA (Digital Government Authority) - Official government employee app serving 50,000+ users',
       'My MT App (Ministry of Tourism) - Employee portal with HealthKit integration and Apple Wallet passes',
-      'SCISP - Enterprise resource management application',
-      'ZATCA (Zakat, Tax & Customs Authority) - Compliance and reporting platform'
+      'SCISP (Saudi Center for International Strategic Partnerships) - Enterprise resource management application',
+      'ZATCA (Zakat, Tax & Customs Authority) - Compliance and reporting platform',
+      'NCGR (National Center for Government Resources) - System app for Ministry of Finance',
+      'TGA (Transport General Authority) - Transportation authority application'
     ],
     tags: ['SwiftUI', 'UIKit', 'MVVM', 'HealthKit', 'Apple Wallet', 'Flutter', 'Unit Testing', 'CI/CD'],
     isActive: true,
   },
   {
-    period: 'Dec 2022 — Dec 2023',
+    period: 'Apr 2025 — Apr 2026 (Part-time)',
+    title: 'Software Engineer',
+    company: 'Bazzary (Super App – E-commerce & Delivery Platform)',
+    years: '1 year',
+    description: 'Bazzary is a fast-growing super app in Yemen that combines e-commerce, delivery, and digital payments into one platform. Building a unified digital ecosystem that connects users, sellers, and logistics providers.',
+    highlights: [
+      'UIKit to SwiftUI Migration - Leading the migration of existing iOS codebase from UIKit to SwiftUI for improved performance and maintainability',
+      'Bazzary Shop - Local shopping platform connecting users with nearby stores',
+      'Bazzary Mart - Daily essentials delivery with quick turnaround',
+      'Bazzary Global - International products marketplace',
+      'Buy Now, Pay Later (BNPL) - Flexible payment solutions'
+    ],
+    tags: ['Swift', 'SwiftUI', 'UIKit', 'Native iOS', 'Migration', 'MVVM', 'E-commerce', 'Payments'],
+    isActive: false,
+  },
+  {
+    period: 'Dec 2022 — Dec 2023 (Part-time)',
     title: 'iOS Reviewer & Instructor',
     company: 'Sprints Academy, Maadi',
+    years: '1 year',
     description: 'Technical educator and code reviewer for iOS development bootcamps. Mentored 100+ junior developers and conducted comprehensive code reviews to ensure best practices and code quality.',
     highlights: [
       'Reviewed 500+ pull requests focusing on Swift best practices',
@@ -31,6 +53,7 @@ const experiences = [
     period: 'Dec 2020 — Jul 2021',
     title: 'Mid iOS Developer',
     company: 'Awammer Elshabaka (Software House)',
+    years: '8 months',
     description: 'Full-stack mobile development for diverse client projects. Developed and maintained production apps across multiple domains from e-commerce to services.',
     highlights: [
       'Cafe Station - POS system with real-time order management',
@@ -45,6 +68,7 @@ const experiences = [
     period: 'Aug 2019 — Nov 2020',
     title: 'Junior iOS Developer',
     company: 'ELMnassa',
+    years: '1 year 4 months',
     description: 'Started career as intern, quickly promoted to junior developer. Gained solid foundation in iOS development working on live production applications.',
     highlights: [
       'Hire App - Job recruitment platform with resume parsing',
@@ -58,56 +82,108 @@ const experiences = [
 ];
 
 const Experience = () => {
-  return (
-    <section className="py-24 px-8 bg-surface-container-low" id="experience">
-      <div className="max-w-7xl mx-auto space-y-16">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-          <h2 className="text-4xl md:text-5xl font-headline font-bold tracking-tight leading-none">
-            Professional <br/><span className="text-primary">Journey</span>
-          </h2>
-          <p className="text-on-surface-variant max-w-md">
-            Chronology of engineering leadership and contribution across diverse mobile ecosystems.
-          </p>
-        </div>
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15 },
+    },
+  };
 
-        <div className="relative space-y-12">
-          {experiences.map((exp, index) => (
-            <div key={index} className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start relative">
-              <div className="md:col-span-3 text-on-surface-variant font-label text-sm uppercase tracking-widest pt-2">
-                {exp.period}
-              </div>
-              <div className="md:col-span-1 flex flex-col items-center">
-                <div className={`w-4 h-4 rounded-full ${exp.isActive ? 'bg-primary shadow-[0_0_15px_rgba(78,222,163,0.8)]' : 'bg-outline-variant'}`}></div>
-                {index < experiences.length - 1 && (
-                  <div className="w-0.5 h-full bg-outline-variant/30 mt-4"></div>
-                )}
-              </div>
-              <div className="md:col-span-8 glass-card p-8 rounded-xl space-y-4">
-                <h3 className="text-2xl font-headline font-bold">{exp.title}</h3>
-                <p className={`${exp.isActive ? 'text-primary' : 'text-on-surface'} font-medium`}>{exp.company}</p>
-                <p className="text-on-surface-variant leading-relaxed text-sm">{exp.description}</p>
-                {exp.highlights && (
-                  <ul className="space-y-2 mt-3">
-                    {exp.highlights.map((highlight, i) => (
-                      <li key={i} className="text-sm text-on-surface-variant flex items-start gap-2">
-                        <span className="text-primary mt-1">•</span>
-                        {highlight}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-                {exp.tags.length > 0 && (
-                  <div className="flex flex-wrap gap-2">
+  const itemVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+  };
+
+  return (
+    <section className="py-28 px-6 bg-surface" id="experience">
+      <div className="max-w-6xl mx-auto space-y-16">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+          variants={containerVariants}
+          className="flex flex-col lg:flex-row lg:items-end justify-between gap-6"
+        >
+          <motion.div variants={itemVariants}>
+            <h2 className="text-4xl md:text-5xl font-bold text-textPrimary tracking-tight leading-tight">
+              Work <span className="text-gradient">Experience</span>
+            </h2>
+          </motion.div>
+          <motion.p variants={itemVariants} className="text-textSecondary max-w-md">
+            A consistent history of delivering impactful engineering work across diverse mobile platforms.
+          </motion.p>
+        </motion.div>
+
+        <div className="relative">
+          <div className="absolute left-4 md:left-1/3 top-0 bottom-0 w-px bg-border"></div>
+          
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-100px' }}
+            variants={containerVariants}
+            className="space-y-12"
+          >
+            {experiences.map((exp, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className="relative grid grid-cols-1 md:grid-cols-[1fr_2px_2fr] gap-6 md:gap-8 items-start"
+              >
+                <div className="absolute left-4 md:left-1/3 -translate-x-1/2 mt-2">
+                  <div className={`w-3 h-3 rounded-full ${exp.isActive ? 'bg-primary shadow-[0_0_10px_rgba(99,102,241,0.8)]' : 'bg-border'}`}></div>
+                </div>
+                
+                <div className="pl-10 md:pl-0 md:text-right text-textMuted text-sm font-medium">
+                  <div>{exp.period}</div>
+                  {exp.years && (
+                    <div className="text-primary text-xs mt-1">{exp.years}</div>
+                  )}
+                </div>
+                
+                <div className="hidden md:block"></div>
+                
+                <motion.div
+                  whileHover={{ scale: 1.01 }}
+                  className="glass p-6 md:p-8 rounded-2xl space-y-4"
+                >
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                    <h3 className="text-xl font-semibold text-textPrimary">{exp.title}</h3>
+                    {exp.isActive && (
+                      <span className="px-3 py-1 bg-accent/10 text-accent text-xs font-medium rounded-full w-fit">
+                        Current
+                      </span>
+                    )}
+                  </div>
+                  <p className={`font-medium ${exp.isActive ? 'text-primary' : 'text-textSecondary'}`}>{exp.company}</p>
+                  <p className="text-textSecondary leading-relaxed text-sm">{exp.description}</p>
+                  
+                  {exp.highlights && (
+                    <ul className="space-y-2 mt-3">
+                      {exp.highlights.map((highlight, i) => (
+                        <li key={i} className="text-sm text-textMuted flex items-start gap-2">
+                          <span className="text-primary mt-1">•</span>
+                          {highlight}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  
+                  <div className="flex flex-wrap gap-2 pt-2">
                     {exp.tags.map((tag) => (
-                      <span key={tag} className="text-[10px] bg-surface-container px-2 py-1 rounded text-on-surface-variant border border-outline-variant/10">
+                      <span 
+                        key={tag} 
+                        className="text-xs px-2.5 py-1 bg-surfaceElevated text-textSecondary rounded-lg border border-border"
+                      >
                         {tag}
                       </span>
                     ))}
                   </div>
-                )}
-              </div>
-            </div>
-          ))}
+                </motion.div>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </div>
     </section>

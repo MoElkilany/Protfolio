@@ -1,7 +1,36 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [displayText, setDisplayText] = useState('');
+  const fullText = 'Senior Mobile Engineer (iOS - Flutter)';
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollProgress = scrollHeight > 0 ? (window.scrollY / scrollHeight) * 100 : 0;
+      setProgress(scrollProgress);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    let index = 0;
+    const interval = setInterval(() => {
+      if (index <= fullText.length) {
+        setDisplayText(fullText.slice(0, index));
+        index++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 80);
+    return () => clearInterval(interval);
+  }, []);
 
   const navLinks = [
     { href: '#about', label: 'About' },
@@ -12,52 +41,93 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-slate-900/80 dark:bg-[#0b1326]/80 backdrop-blur-xl shadow-[0_20px_40px_rgba(6,14,32,0.4)]">
-      <div className="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
-        <a href="#" className="text-xl font-bold tracking-tighter text-slate-100 dark:text-[#dae2fd] font-headline">
-          Mobile Engineer Portfolio
-        </a>
-        
-        <div className="hidden md:flex items-center space-x-8">
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled ? 'glass py-3' : 'py-5 bg-transparent'
+      }`}
+    >
+      <motion.div
+        className="absolute bottom-0 left-0 h-[3px] w-full bg-gradient-to-r from-primary via-accent to-primary z-[60] rounded-full"
+        style={{ width: `${progress}%` }}
+        transition={{ duration: 0.1 }}
+      />
+      <div className="max-w-6xl mx-auto px-6 flex justify-between items-center">
+        <motion.a
+          href="#"
+          className="text-lg font-semibold text-textPrimary tracking-tight font-cursive"
+          whileHover={{ scale: 1.02 }}
+          transition={{ duration: 0.2 }}
+          >
+            {displayText}
+          </motion.a>
+
+        <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a
+            <motion.a
               key={link.href}
               href={link.href}
-              className="text-slate-400 dark:text-[#bec8d2] font-medium hover:text-emerald-300 dark:hover:text-[#6ffbbe] transition-colors duration-300"
+              className="text-sm text-textSecondary hover:text-textPrimary transition-colors duration-200"
+              whileHover={{ y: -2 }}
+              transition={{ duration: 0.2 }}
             >
               {link.label}
-            </a>
+            </motion.a>
           ))}
         </div>
 
-        <button className="bg-gradient-to-r from-primary to-primary-container text-on-primary-container font-headline px-6 py-2 rounded-full font-bold scale-95 active:scale-90 transition-transform">
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="hidden md:block px-5 py-2.5 bg-primary text-white text-sm font-semibold rounded-lg hover:bg-primaryHover transition-colors duration-200 glow-primary"
+        >
           Download CV
-        </button>
+        </motion.button>
 
         <button
-          className="md:hidden text-slate-400"
+          className="md:hidden text-textSecondary"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"
         >
-          <span className="material-symbols-outlined">{isOpen ? 'close' : 'menu'}</span>
+          <span className="material-symbols-outlined text-2xl">
+            {isOpen ? 'close' : 'menu'}
+          </span>
         </button>
       </div>
 
-      {isOpen && (
-        <div className="md:hidden bg-surface-container p-4 space-y-4">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="block text-slate-400 dark:text-[#bec8d2] font-medium"
-              onClick={() => setIsOpen(false)}
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
-      )}
-    </nav>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden glass overflow-hidden"
+          >
+            <div className="px-6 py-4 space-y-4">
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="block text-textSecondary hover:text-textPrimary transition-colors"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {link.label}
+                </a>
+              ))}
+              <motion.button
+                whileTap={{ scale: 0.95 }}
+                className="w-full px-5 py-2.5 bg-primary text-white text-sm font-semibold rounded-lg"
+              >
+                Download CV
+              </motion.button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.nav>
   );
 };
 
