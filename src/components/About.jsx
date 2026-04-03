@@ -1,10 +1,9 @@
 import { motion } from 'framer-motion';
-import { FaTrophy, FaLightbulb } from 'react-icons/fa';
 
 const About = () => {
   const achievements = [
-    { icon: FaTrophy, text: 'ECPC 2018 Qualifications Round – Ranked 37th' },
-    { icon: FaLightbulb, text: "Vodafone Innovation Hackathon – Top 10 out of 230 ideas" },
+    { icon: 'emoji_events', text: 'ECPC 2018 Qualifications Round (37th Place)' },
+    { icon: 'lightbulb', text: "Vodafone's Innovation Hackathon (Top 10 among 230 ideas)" },
   ];
 
   const containerVariants = {
@@ -39,34 +38,35 @@ const About = () => {
           </motion.div>
           
           <motion.div variants={itemVariants} className="space-y-6 text-lg text-textSecondary leading-relaxed">
-            <p className="text-center max-w-2xl mx-auto">
-              Mobile engineer focused on building simple, fast, and user-friendly apps. I care about performance, clean code, and delivering smooth user experiences.
-            </p>
-            
-            <div className="p-6 bg-surfaceElevated rounded-xl border border-border">
-              <h4 className="font-semibold text-textPrimary mb-3">Education</h4>
-              <p className="text-primary uppercase tracking-wider mb-1">Bachelor of Computer Science & Information Science</p>
-              <p className="text-textSecondary">Mansoura University (2016–2020)</p>
-              <p className="text-sm text-textMuted mt-2">Grade: Very Good – Graduation Project: Excellent</p>
-            </div>
-            
-            <div className="p-6 bg-surfaceElevated rounded-xl border border-border">
-              <h4 className="font-semibold text-textPrimary mb-3">Achievements</h4>
-              <ul className="space-y-3">
-                {achievements.map((item, index) => (
-                  <motion.li 
-                    key={index}
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="flex items-center gap-3"
-                  >
-                    <item.icon className="text-primary text-lg" />
-                    <span className="text-textSecondary text-sm">{item.text}</span>
-                  </motion.li>
-                ))}
-              </ul>
+            <p>
+                I build intuitive digital products that live in people's pockets. My career is dedicated to mastering the mobile ecosystem, from memory management and smooth animations to robust CI/CD pipelines.
+              </p>
+              
+              <div className="p-6 bg-surfaceElevated rounded-xl border border-border">
+                <h4 className="font-semibold text-textPrimary mb-3">Education</h4>
+                <p className="text-sm text-primary uppercase tracking-wider mb-1">Mansoura University</p>
+                <p className="text-textSecondary">Bachelor of Computer Science & Information Science</p>
+                <p className="text-sm text-textMuted mt-2">2016 — 2020 | Grade: Very Good | Graduation Project: Excellent</p>
+              </div>
+              
+              <div className="p-6 bg-surfaceElevated rounded-xl border border-border">
+                <h4 className="font-semibold text-textPrimary mb-3">Key Achievements</h4>
+                <ul className="space-y-3">
+                  {achievements.map((item, index) => (
+                    <motion.li 
+                      key={index}
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 }}
+                      className="flex items-center gap-3"
+                    >
+                      <span className="material-symbols-outlined text-primary text-lg">{item.icon}</span>
+                      <span className="text-textSecondary text-sm">{item.text}</span>
+                    </motion.li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </motion.div>
         </motion.div>
