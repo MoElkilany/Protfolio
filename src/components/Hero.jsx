@@ -191,7 +191,13 @@ const Hero = () => {
               whileTap={{ scale: 0.98 }}
               className="px-8 py-3.5 border border-border text-textPrimary font-semibold rounded-lg hover:bg-surfaceElevated hover:border-textMuted transition-all duration-200"
             >
-              Download CV
+              <a
+                href="/Mohamed Elkilany (Mobile Engineer).pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Preview CV
+              </a>
             </motion.button>
           </MagneticWrapper>
         </motion.div>

@@ -1,173 +1,259 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
+import MyMT from '../assets/MyMT.png';
+import DGA from '../assets/DGA.png';
+import SCISP from '../assets/SCISP.png';
+import TGA from '../assets/TGA.jpg';
+import ZATCA from '../assets/ZATCA.png';
+import NCGR from '../assets/NCGR.png';
+import Bazzarry from '../assets/Bazzarry.png';
+import Alrajhi from '../assets/alrajhi.png';
 
-const projects = [
+const enterpriseProjects = [
   {
     id: 1,
-    title: 'DGA App',
-    description: 'Digital Government Authority app for KSA employees. Built with SwiftUI and MVVM pattern for seamless data flow.',
-    icon: 'account_balance',
-    tags: ['SwiftUI', 'MVVM', 'Unit Testing'],
-    stats: '50,000+ users',
+    title: 'My MT',
+    fullName: 'Ministry of Tourism',
+    subtitle: 'Native iOS',
+    description: 'A secure enterprise-grade mobile application developed for the Ministry of Tourism in Saudi Arabia, focused on internal operations and workforce enablement. The app delivers high-performance native experiences with strict compliance to security and data governance standards.',
+    tags: ['Swift', 'SwiftUI', 'HealthKit'],
+    image: MyMT,
   },
   {
     id: 2,
-    title: 'My MT App',
-    description: 'Ministry of Tourism (KSA) employee app. Integrates HealthKit for physical data and Apple Wallet for Digital Cards.',
-    icon: 'card_travel',
-    tags: ['UIKit', 'HealthKit', 'Apple Wallet'],
-    stats: 'Enterprise',
+    title: 'DGA',
+    fullName: 'Digital Government Authority',
+    subtitle: 'Native iOS',
+    description: 'A government-focused digital platform designed for the Digital Government Authority to streamline internal processes and enhance operational efficiency across departments. Built using native iOS technologies to ensure performance, scalability, and seamless integration with existing government systems.',
+    tags: ['Swift', 'SwiftUI', 'REST APIs'],
+    image: DGA,
   },
   {
     id: 3,
-    title: 'TGA Taxi / Driver',
-    description: 'Uber-like Flutter application for ride-hailing and driver management, featuring real-time chat and multi-language support.',
-    icon: 'local_taxi',
-    tags: ['Flutter', 'Firebase', 'Maps'],
-    stats: 'Real-time',
+    title: 'SCISP',
+    fullName: 'Saudi Center for International Strategic Partnerships',
+    subtitle: 'Native iOS',
+    description: 'A mission-critical application developed for the Saudi Center for International Strategic Partnerships, supporting complex workflows and secure data handling. Engineered with a strong emphasis on reliability, performance, and enterprise-level architecture.',
+    tags: ['Swift', 'SwiftUI', 'Security'],
+    image: SCISP,
   },
   {
     id: 4,
-    title: 'Religious Literacy Apps',
-    description: 'Developed "Kitab Tahdhib al-Lisan" and "Kitab al-Juz\' al-Rashidi" as charity projects for Alilm wa Alirfan Foundation.',
-    icon: 'menu_book',
-    tags: ['Flutter', 'iOS', 'App Store'],
-    stats: 'Charity',
+    title: 'TGA',
+    fullName: 'Transport General Authority',
+    subtitle: 'Flutter',
+    description: 'A cross-platform mobility solution developed for the Saudi Transport General Authority, enabling taxi and driver ecosystem management. The app ensures smooth user experience across platforms while integrating with national transport regulations and backend systems.',
+    tags: ['Flutter', 'Firebase', 'Maps'],
+    image: TGA,
   },
   {
     id: 5,
-    title: 'ZATCA Compliance',
-    description: 'Zakat, Tax & Customs Authority compliance and reporting platform for businesses in Saudi Arabia.',
-    icon: 'description',
+    title: 'ZATCA',
+    fullName: 'Zakat, Tax and Customs Authority',
+    subtitle: 'Flutter',
+    description: 'A large-scale fintech-related mobile application built for the Zakat, Tax and Customs Authority in Saudi Arabia. Focused on delivering secure, scalable, and user-friendly experiences aligned with financial regulations and compliance standards.',
     tags: ['Flutter', 'iOS', 'REST APIs'],
-    stats: 'Government',
+    image: ZATCA,
   },
   {
     id: 6,
-    title: 'SCISP Enterprise',
-    description: 'Enterprise resource management application for Saudi government agencies with secure authentication.',
-    icon: 'business',
-    tags: ['SwiftUI', 'REST APIs', 'Security'],
-    stats: 'Enterprise',
+    title: 'NCGR',
+    fullName: 'National Center for Government Resources',
+    subtitle: 'Native iOS',
+    description: 'An advanced committee and decision-management system tailored for the National Center for Government Resources. The app facilitates structured workflows, approvals, and collaboration in a highly secure environment using native iOS capabilities.',
+    tags: ['Swift', 'SwiftUI', 'Enterprise'],
+    image: NCGR,
   },
 ];
 
-const filterButtons = ['All', 'iOS Native', 'Flutter'];
+const publicProjects = [
+  {
+    id: 1,
+    title: 'Bazzary',
+    fullName: 'Bazzary E-commerce',
+    subtitle: 'E-commerce',
+    description: 'A fast-growing super app providing e-commerce, delivery, and digital payment solutions.',
+    tags: ['Swift', 'SwiftUI', 'iOS'],
+    image: Bazzarry,
+    appStore: 'https://apps.apple.com/eg/app/bazzarry-%D8%A8%D8%A7%D8%B2%D8%A7%D8%B1%D9%8A/id1631702675',
+    country: 'Yemen',
+  },
+  {
+    id: 2,
+    title: 'Alrajhi',
+    fullName: 'Alrajhi For Urban Projects',
+    subtitle: 'Flutter',
+    description: 'A modern mobile solution supporting urban development and project management workflows.',
+    tags: ['Flutter', 'iOS', 'Android'],
+    image: Alrajhi,
+    appStore: 'https://apps.apple.com/eg/app/%D8%A7%D9%84%D8%B1%D8%A7%D8%AC%D8%AD%D9%8A/id6757990415',
+    country: 'Egypt',
+  },
+];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+};
+
+const ProjectCard = ({ project, isEnterprise }) => (
+  <motion.div
+    variants={itemVariants}
+    whileHover={{ y: -8, transition: { duration: 0.2 } }}
+    className={`group relative overflow-hidden rounded-3xl transition-all duration-300 ${
+      isEnterprise 
+        ? 'bg-surface border border-amber-500/20' 
+        : 'bg-surface border border-border'
+    }`}
+  >
+    <div className="relative p-6">
+      <div className="relative z-10">
+        <div className={`w-full h-40 rounded-2xl mb-4 flex items-center justify-center overflow-hidden ${
+          isEnterprise ? 'bg-amber-500/10' : 'bg-primary/10'
+        }`}>
+          <img 
+            src={project.image} 
+            alt={project.title}
+            className="w-28 h-28 object-contain drop-shadow-xl"
+          />
+        </div>
+
+        <div className="flex items-start justify-between gap-3 mb-3">
+          <div>
+            <h3 className={`text-lg font-bold text-textPrimary`}>
+              {project.title}
+            </h3>
+            {project.fullName && (
+              <p className={`text-sm text-textSecondary`}>
+                {project.fullName}
+              </p>
+            )}
+            <p className={`text-xs mt-1 text-textMuted`}>
+              {project.subtitle}
+            </p>
+          </div>
+          {isEnterprise && (
+            <span className="shrink-0 px-2.5 py-1 bg-amber-500/10 border border-amber-500/30 rounded-full">
+              <span className="text-xs font-semibold text-amber-600 dark:text-amber-400">KSA</span>
+            </span>
+          )}
+          {!isEnterprise && project.country && (
+            <span className="shrink-0 px-2.5 py-1 bg-accent/10 border border-accent/30 rounded-full">
+              <span className="text-xs font-semibold text-accent">{project.country}</span>
+            </span>
+          )}
+        </div>
+
+        <p className={`text-sm leading-relaxed mb-4 line-clamp-6 text-textSecondary`}>
+          {project.description}
+        </p>
+
+        <div className="flex flex-wrap gap-2">
+          {project.tags.map((tag) => (
+            <span 
+              key={tag} 
+              className={`text-xs font-medium px-3 py-1 rounded-lg ${
+                isEnterprise 
+                  ? 'bg-amber-500/10 text-amber-600 dark:text-amber-300 border border-amber-500/20' 
+                  : 'bg-primary/10 text-primary border border-primary/10'
+              }`}
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        {isEnterprise && (
+          <div className="mt-4 pt-4 border-t border-amber-500/10">
+            <p className="text-xs text-amber-600/40 dark:text-amber-400/40">
+              Government Project
+            </p>
+          </div>
+        )}
+
+        {!isEnterprise && project.appStore && (
+          <a 
+            href={project.appStore} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="mt-4 inline-flex items-center justify-center w-10 h-10 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors"
+          >
+            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.02.41-2.11 1.05-2.91l-.01-.01z"/>
+            </svg>
+          </a>
+        )}
+      </div>
+    </div>
+  </motion.div>
+);
 
 const Projects = () => {
-  const [activeFilter, setActiveFilter] = useState('All');
-
-  const filteredProjects = activeFilter === 'All' 
-    ? projects 
-    : activeFilter === 'iOS Native'
-      ? projects.filter(p => p.tags.includes('SwiftUI') || p.tags.includes('UIKit'))
-      : projects.filter(p => p.tags.includes('Flutter'));
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1 },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-  };
-
   return (
     <section className="py-28 px-6 bg-background" id="projects">
-      <div className="max-w-6xl mx-auto space-y-16">
+      <div className="max-w-7xl mx-auto space-y-16">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
           variants={containerVariants}
-          className="flex flex-col lg:flex-row justify-between items-center gap-8"
+          className="text-center"
         >
           <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl font-bold text-textPrimary tracking-tight">
             Featured <span className="text-gradient">Projects</span>
           </motion.h2>
-          <motion.div 
-            variants={itemVariants}
-            className="flex flex-wrap justify-center gap-2 bg-surface p-1.5 rounded-xl border border-border"
-          >
-            {filterButtons.map((filter) => (
-              <motion.button
-                key={filter}
-                onClick={() => setActiveFilter(filter)}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className={`px-5 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                  activeFilter === filter
-                    ? 'bg-primary text-white'
-                    : 'text-textSecondary hover:text-textPrimary hover:bg-surfaceElevated'
-                }`}
-              >
-                {filter}
-              </motion.button>
-            ))}
-          </motion.div>
+          <motion.p variants={itemVariants} className="text-textSecondary mt-4 max-w-2xl mx-auto">
+            Building powerful mobile experiences for enterprise and public audiences
+          </motion.p>
         </motion.div>
 
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
+          viewport={{ once: true, margin: '-50px' }}
           variants={containerVariants}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="space-y-6"
         >
-          <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project) => (
-              <motion.div
-                key={project.id}
-                variants={itemVariants}
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.3 }}
-                whileHover={{ y: -8, transition: { duration: 0.2 } }}
-                className="group relative bg-surface border border-border rounded-2xl overflow-hidden hover:border-primary/50 hover:shadow-[0_20px_50px_rgba(99,102,241,0.15)] transition-all duration-300"
-              >
-                <div className="aspect-[4/3] relative overflow-hidden bg-surfaceElevated flex items-center justify-center">
-                  <motion.span 
-                    className="material-symbols-outlined text-primary text-7xl opacity-15 group-hover:opacity-25 group-hover:scale-110 transition-all duration-500"
-                  >
-                    {project.icon}
-                  </motion.span>
-                  <div className="absolute top-4 right-4 px-3 py-1 bg-surface/80 backdrop-blur-sm rounded-full">
-                    <span className="text-xs font-medium text-primary">{project.stats}</span>
-                  </div>
-                </div>
-                <div className="p-6 space-y-4">
-                  <div className="flex justify-between items-start">
-                    <h3 className="text-lg font-semibold text-textPrimary group-hover:text-primary transition-colors">
-                      {project.title}
-                    </h3>
-                    <motion.span 
-                      className="material-symbols-outlined text-textMuted group-hover:text-primary transition-colors"
-                      whileHover={{ scale: 1.2, rotate: 45 }}
-                    >
-                      open_in_new
-                    </motion.span>
-                  </div>
-                  <p className="text-textSecondary text-sm leading-relaxed">{project.description}</p>
-                  <div className="flex flex-wrap gap-2 pt-2">
-                    {project.tags.map((tag) => (
-                      <span 
-                        key={tag} 
-                        className="text-xs font-medium text-primary bg-primary/10 px-2.5 py-1 rounded-lg"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
+          <motion.div variants={itemVariants} className="flex items-center gap-4">
+            <div className="flex items-center gap-2 px-4 py-2 bg-amber-500/10 rounded-xl border border-amber-500/20">
+              <span className="text-amber-600 dark:text-amber-400 font-semibold">Enterprise Apps</span>
+            </div>
+            <div className="flex-1 h-px bg-gradient-to-r from-border to-transparent" />
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {enterpriseProjects.map((project) => (
+              <ProjectCard key={project.id} project={project} isEnterprise={true} />
             ))}
-          </AnimatePresence>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-50px' }}
+          variants={containerVariants}
+          className="space-y-6"
+        >
+          <motion.div variants={itemVariants} className="flex items-center gap-4">
+            <div className="flex items-center gap-2 px-4 py-2 bg-accent/10 rounded-xl border border-accent/20">
+              <span className="text-accent font-semibold">Public Apps</span>
+            </div>
+            <div className="flex-1 h-px bg-gradient-to-r from-border to-transparent" />
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {publicProjects.map((project) => (
+              <ProjectCard key={project.id} project={project} isEnterprise={false} />
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>
