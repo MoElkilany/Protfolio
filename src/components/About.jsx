@@ -39,34 +39,33 @@ const About = () => {
           
           <motion.div variants={itemVariants} className="space-y-6 text-lg text-textSecondary leading-relaxed">
             <p>
-                I build intuitive digital products that live in people's pockets. My career is dedicated to mastering the mobile ecosystem, from memory management and smooth animations to robust CI/CD pipelines.
-              </p>
-              
-              <div className="p-6 bg-surfaceElevated rounded-xl border border-border">
-                <h4 className="font-semibold text-textPrimary mb-3">Education</h4>
-                <p className="text-sm text-primary uppercase tracking-wider mb-1">Mansoura University</p>
-                <p className="text-textSecondary">Bachelor of Computer Science & Information Science</p>
-                <p className="text-sm text-textMuted mt-2">2016 — 2020 | Grade: Very Good | Graduation Project: Excellent</p>
-              </div>
-              
-              <div className="p-6 bg-surfaceElevated rounded-xl border border-border">
-                <h4 className="font-semibold text-textPrimary mb-3">Key Achievements</h4>
-                <ul className="space-y-3">
-                  {achievements.map((item, index) => (
-                    <motion.li 
-                      key={index}
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
-                      className="flex items-center gap-3"
-                    >
-                      <span className="material-symbols-outlined text-primary text-lg">{item.icon}</span>
-                      <span className="text-textSecondary text-sm">{item.text}</span>
-                    </motion.li>
-                  ))}
-                </ul>
-              </div>
+              I build intuitive digital products that live in people's pockets. My career is dedicated to mastering the mobile ecosystem, from memory management and smooth animations to robust CI/CD pipelines.
+            </p>
+            
+            <div className="p-6 bg-surfaceElevated rounded-xl border border-border">
+              <h4 className="font-semibold text-textPrimary mb-3">Education</h4>
+              <p className="text-sm text-primary uppercase tracking-wider mb-1">Mansoura University</p>
+              <p className="text-textSecondary">Bachelor of Computer Science & Information Science</p>
+              <p className="text-sm text-textMuted mt-2">2016 — 2020 | Grade: Very Good | Graduation Project: Excellent</p>
+            </div>
+            
+            <div className="p-6 bg-surfaceElevated rounded-xl border border-border">
+              <h4 className="font-semibold text-textPrimary mb-3">Key Achievements</h4>
+              <ul className="space-y-3">
+                {achievements.map((item, index) => (
+                  <motion.li 
+                    key={index}
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    className="flex items-center gap-3"
+                  >
+                    <span className="material-symbols-outlined text-primary text-lg">{item.icon}</span>
+                    <span className="text-textSecondary text-sm">{item.text}</span>
+                  </motion.li>
+                ))}
+              </ul>
             </div>
           </motion.div>
         </motion.div>
