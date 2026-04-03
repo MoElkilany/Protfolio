@@ -145,7 +145,6 @@ const Experience = () => {
                 <div className="hidden md:block"></div>
                 
                 <motion.div
-                  whileHover={{ scale: 1.01 }}
                   className="glass p-6 md:p-8 rounded-2xl space-y-4"
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">

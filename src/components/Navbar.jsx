@@ -57,7 +57,7 @@ const Navbar = () => {
       <div className="max-w-6xl mx-auto px-6 flex justify-between items-center">
         <motion.a
           href="#"
-          className="text-lg font-semibold text-textPrimary tracking-tight font-cursive"
+          className="text-lg font-semibold text-textPrimary tracking-tight font-sans"
           whileHover={{ scale: 1.02 }}
           transition={{ duration: 0.2 }}
           >
@@ -78,13 +78,13 @@ const Navbar = () => {
           ))}
         </div>
 
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+        <a
+          href="/Mohamed Elkilany (Mobile Engineer).pdf"
+          download="Mohamed Elkilany (Mobile Engineer).pdf"
           className="hidden md:block px-5 py-2.5 bg-primary text-white text-sm font-semibold rounded-lg hover:bg-primaryHover transition-colors duration-200 glow-primary"
         >
           Download CV
-        </motion.button>
+        </a>
 
         <button
           className="md:hidden text-textSecondary"
@@ -117,12 +117,13 @@ const Navbar = () => {
                   {link.label}
                 </a>
               ))}
-              <motion.button
-                whileTap={{ scale: 0.95 }}
-                className="w-full px-5 py-2.5 bg-primary text-white text-sm font-semibold rounded-lg"
+              <a
+                href="/Mohamed Elkilany (Mobile Engineer).pdf"
+                download="Mohamed Elkilany (Mobile Engineer).pdf"
+                className="w-full px-5 py-2.5 bg-primary text-white text-sm font-semibold rounded-lg text-center block"
               >
                 Download CV
-              </motion.button>
+              </a>
             </div>
           </motion.div>
         )}
