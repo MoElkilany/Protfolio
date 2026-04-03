@@ -13,7 +13,9 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    const { name, email, message } = formData;
+    const mailtoLink = `mailto:mohamedsayedelkilany@gmail.com?subject=Portfolio Contact from ${name}&body=Name: ${name}%0AEmail: ${email}%0A%0AMessage:%0A${message}`;
+    window.location.href = mailtoLink;
   };
 
   const handleChange = (e) => {

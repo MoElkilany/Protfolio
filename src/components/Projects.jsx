@@ -109,14 +109,14 @@ const ProjectCard = ({ project, isEnterprise }) => (
     whileHover={{ y: -8, transition: { duration: 0.2 } }}
     className={`group relative overflow-hidden rounded-3xl transition-all duration-300 ${
       isEnterprise 
-        ? 'bg-gradient-to-br from-[#1a1f35] via-[#151a28] to-[#0d1119] border border-amber-500/20' 
+        ? 'bg-surface border border-amber-500/20' 
         : 'bg-surface border border-border'
     }`}
   >
     <div className="relative p-6">
       <div className="relative z-10">
         <div className={`w-full h-40 rounded-2xl mb-4 flex items-center justify-center overflow-hidden ${
-          isEnterprise ? 'bg-gradient-to-br from-amber-500/10 to-transparent' : 'bg-gradient-to-br from-primary/10 to-transparent'
+          isEnterprise ? 'bg-amber-500/10' : 'bg-primary/10'
         }`}>
           <img 
             src={project.image} 
@@ -127,25 +127,21 @@ const ProjectCard = ({ project, isEnterprise }) => (
 
         <div className="flex items-start justify-between gap-3 mb-3">
           <div>
-            <h3 className={`text-lg font-bold ${
-              isEnterprise ? 'text-amber-50' : 'text-textPrimary'
-            }`}>
+            <h3 className={`text-lg font-bold text-textPrimary`}>
               {project.title}
             </h3>
             {project.fullName && (
-              <p className={`text-sm ${isEnterprise ? 'text-amber-400/70' : 'text-textMuted'}`}>
+              <p className={`text-sm text-textSecondary`}>
                 {project.fullName}
               </p>
             )}
-            <p className={`text-xs mt-1 ${
-              isEnterprise ? 'text-amber-400/50' : 'text-textMuted'
-            }`}>
+            <p className={`text-xs mt-1 text-textMuted`}>
               {project.subtitle}
             </p>
           </div>
           {isEnterprise && (
             <span className="shrink-0 px-2.5 py-1 bg-amber-500/10 border border-amber-500/30 rounded-full">
-              <span className="text-xs font-semibold text-amber-400">KSA</span>
+              <span className="text-xs font-semibold text-amber-600 dark:text-amber-400">KSA</span>
             </span>
           )}
           {!isEnterprise && project.country && (
@@ -155,9 +151,7 @@ const ProjectCard = ({ project, isEnterprise }) => (
           )}
         </div>
 
-        <p className={`text-sm leading-relaxed mb-4 line-clamp-2 ${
-          isEnterprise ? 'text-amber-100/60' : 'text-textSecondary'
-        }`}>
+        <p className={`text-sm leading-relaxed mb-4 line-clamp-6 text-textSecondary`}>
           {project.description}
         </p>
 
@@ -167,7 +161,7 @@ const ProjectCard = ({ project, isEnterprise }) => (
               key={tag} 
               className={`text-xs font-medium px-3 py-1 rounded-lg ${
                 isEnterprise 
-                  ? 'bg-amber-500/10 text-amber-300 border border-amber-500/20' 
+                  ? 'bg-amber-500/10 text-amber-600 dark:text-amber-300 border border-amber-500/20' 
                   : 'bg-primary/10 text-primary border border-primary/10'
               }`}
             >
@@ -178,7 +172,7 @@ const ProjectCard = ({ project, isEnterprise }) => (
 
         {isEnterprise && (
           <div className="mt-4 pt-4 border-t border-amber-500/10">
-            <p className="text-xs text-amber-400/40">
+            <p className="text-xs text-amber-600/40 dark:text-amber-400/40">
               Government Project
             </p>
           </div>
@@ -229,7 +223,7 @@ const Projects = () => {
         >
           <motion.div variants={itemVariants} className="flex items-center gap-4">
             <div className="flex items-center gap-2 px-4 py-2 bg-amber-500/10 rounded-xl border border-amber-500/20">
-              <span className="text-amber-400 font-semibold">Enterprise Apps</span>
+              <span className="text-amber-600 dark:text-amber-400 font-semibold">Enterprise Apps</span>
             </div>
             <div className="flex-1 h-px bg-gradient-to-r from-border to-transparent" />
           </motion.div>

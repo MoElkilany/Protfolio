@@ -91,8 +91,8 @@ const Navbar = () => {
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"
         >
-          <span className="material-symbols-outlined text-2xl">
-            {isOpen ? 'close' : 'menu'}
+          <span className="text-sm font-medium">
+            {isOpen ? 'Close' : 'Menu'}
           </span>
         </button>
       </div>
