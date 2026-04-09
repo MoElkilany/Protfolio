@@ -63,6 +63,15 @@ const enterpriseProjects = [
     tags: ['Swift', 'SwiftUI', 'Enterprise'],
     image: NCGR,
   },
+  {
+    id: 7,
+    title: 'NEW',
+    fullName: 'New Enterprise Project',
+    subtitle: 'Type here',
+    description: 'Description goes here. Add your project details including the purpose, features, and technologies used.',
+    tags: ['Tech', 'Stack', 'Details'],
+    image: NCGR,
+  },
 ];
 
 const publicProjects = [
@@ -86,6 +95,7 @@ const publicProjects = [
     tags: ['Flutter', 'iOS', 'Android'],
     image: Alrajhi,
     appStore: 'https://apps.apple.com/eg/app/%D8%A7%D9%84%D8%B1%D8%A7%D8%AC%D8%AD%D9%8A/id6757990415',
+    playStore: 'https://play.google.com/store/apps/details?id=com.alrajhi.realestate',
     country: 'Egypt',
   },
 ];
@@ -106,89 +116,118 @@ const itemVariants = {
 const ProjectCard = ({ project, isEnterprise }) => (
   <motion.div
     variants={itemVariants}
-    whileHover={{ y: -8, transition: { duration: 0.2 } }}
-    className={`group relative overflow-hidden rounded-3xl transition-all duration-300 ${
+    whileHover={{ y: -6, transition: { duration: 0.3 } }}
+    className={`group relative overflow-hidden rounded-2xl transition-all duration-300 ${
       isEnterprise 
-        ? 'bg-surface border border-amber-500/20' 
-        : 'bg-surface border border-border'
+        ? 'bg-white dark:bg-white/5 border border-amber-500/30'
+        : 'bg-white dark:bg-white/5 border border-gray-200 dark:border-gray-700 shadow-xl shadow-primary/5'
     }`}
   >
-    <div className="relative p-6">
-      <div className="relative z-10">
-        <div className={`w-full h-40 rounded-2xl mb-4 flex items-center justify-center overflow-hidden ${
-          isEnterprise ? 'bg-amber-500/10' : 'bg-primary/10'
-        }`}>
-          <img 
-            src={project.image} 
-            alt={project.title}
-            className="w-28 h-28 object-contain drop-shadow-xl"
-          />
-        </div>
-
-        <div className="flex items-start justify-between gap-3 mb-3">
-          <div>
-            <h3 className={`text-lg font-bold text-textPrimary`}>
-              {project.title}
-            </h3>
-            {project.fullName && (
-              <p className={`text-sm text-textSecondary`}>
-                {project.fullName}
-              </p>
-            )}
-            <p className={`text-xs mt-1 text-textMuted`}>
-              {project.subtitle}
-            </p>
-          </div>
-          {isEnterprise && (
-            <span className="shrink-0 px-2.5 py-1 bg-amber-500/10 border border-amber-500/30 rounded-full">
-              <span className="text-xs font-semibold text-amber-600 dark:text-amber-400">KSA</span>
-            </span>
-          )}
-          {!isEnterprise && project.country && (
-            <span className="shrink-0 px-2.5 py-1 bg-accent/10 border border-accent/30 rounded-full">
-              <span className="text-xs font-semibold text-accent">{project.country}</span>
-            </span>
-          )}
-        </div>
-
-        <p className={`text-sm leading-relaxed mb-4 line-clamp-6 text-textSecondary`}>
-          {project.description}
-        </p>
-
-        <div className="flex flex-wrap gap-2">
-          {project.tags.map((tag) => (
-            <span 
-              key={tag} 
-              className={`text-xs font-medium px-3 py-1 rounded-lg ${
-                isEnterprise 
-                  ? 'bg-amber-500/10 text-amber-600 dark:text-amber-300 border border-amber-500/20' 
-                  : 'bg-primary/10 text-primary border border-primary/10'
-              }`}
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-
-        {isEnterprise && (
-          <div className="mt-4 pt-4 border-t border-amber-500/10">
-            <p className="text-xs text-amber-600/40 dark:text-amber-400/40">
-              Government Project
-            </p>
-          </div>
+    <div className="relative h-56 overflow-hidden">
+      <img 
+        src={project.image} 
+        alt={project.title}
+        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+      />
+      <div className={`absolute inset-0 ${
+        isEnterprise 
+          ? 'bg-gradient-to-br from-black/60 via-black/50 to-black/60' 
+          : 'bg-gradient-to-br from-primary-500/80 via-primary-600/60 to-primary-700/80'
+      }`} />
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIgZmlsbD0id2hpdGUiIGZpbGwtb3BhY2l0eT0iMC4xIi8+PC9zdmc+')] opacity-20" />
+      
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/80 to-transparent" />
+      
+      <div className="absolute top-4 right-4 flex gap-2">
+        {isEnterprise ? (
+          <span className="px-3 py-1.5 bg-white/20 backdrop-blur-md rounded-full">
+            <span className="text-xs font-bold text-white">KSA</span>
+          </span>
+        ) : project.country && (
+          <span className="px-3 py-1.5 bg-white/20 backdrop-blur-md rounded-full">
+            <span className="text-xs font-bold text-white">{project.country}</span>
+          </span>
         )}
+      </div>
 
-        {!isEnterprise && project.appStore && (
-          <a 
-            href={project.appStore} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="mt-4 inline-flex items-center justify-center w-10 h-10 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors"
+      <div className="absolute bottom-4 left-4 right-4">
+        <div className="flex items-center gap-2 mb-2">
+          <span className={`text-xs font-medium px-2 py-0.5 rounded-md ${
+            isEnterprise ? 'bg-amber-300/30 text-amber-100' : 'bg-primary-300/30 text-primary-100'
+          }`}>
+            {project.subtitle}
+          </span>
+        </div>
+        <h3 className="text-2xl font-bold text-white">
+          {project.title}
+        </h3>
+        {project.fullName && (
+          <p className="text-sm text-white/70 mt-1">
+            {project.fullName}
+          </p>
+        )}
+      </div>
+    </div>
+
+    <div className="p-5">
+      <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
+        {project.description}
+      </p>
+
+      <div className="flex flex-wrap gap-2 mb-4">
+        {project.tags.map((tag) => (
+          <span 
+            key={tag} 
+            className={`text-xs font-medium px-3 py-1.5 rounded-lg ${
+              isEnterprise 
+                ? 'bg-amber-50 text-amber-700 border border-amber-200' 
+                : 'bg-primary-50 text-primary-700 border border-primary-200'
+            }`}
           >
-            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.02.41-2.11 1.05-2.91l-.01-.01z"/>
+            {tag}
+          </span>
+        ))}
+      </div>
+
+      <div className="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-gray-800">
+        {isEnterprise ? (
+          <div className="flex items-center gap-2">
+            <svg className="w-4 h-4 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
             </svg>
-          </a>
+            <span className="text-xs text-gray-500 dark:text-gray-400">
+              Government Project
+            </span>
+          </div>
+        ) : (
+          <div className="flex items-center gap-3">
+            {project.appStore && (
+              <a 
+                href={project.appStore} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-3 py-1.5 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors"
+              >
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.02.41-2.11 1.05-2.91l-.01-.01z"/>
+                </svg>
+                <span className="text-xs font-medium">App Store</span>
+              </a>
+            )}
+            {project.playStore && (
+              <a 
+                href={project.playStore} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-3 py-1.5 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors"
+              >
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 010 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.283 14.025l8.635-8.635-2.302-2.302-6.333 10.937z"/>
+                </svg>
+                <span className="text-xs font-medium">Google Play</span>
+              </a>
+            )}
+          </div>
         )}
       </div>
     </div>
