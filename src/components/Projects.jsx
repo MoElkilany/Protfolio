@@ -65,11 +65,11 @@ const enterpriseProjects = [
   },
   {
     id: 7,
-    title: 'NEW',
-    fullName: 'New Enterprise Project',
-    subtitle: 'Type here',
-    description: 'Description goes here. Add your project details including the purpose, features, and technologies used.',
-    tags: ['Tech', 'Stack', 'Details'],
+    title: 'NCGR',
+    fullName: 'National Center for Government Resource Systems',
+    subtitle: 'Financial System',
+    description: 'A financial system application manages and tracks financial activities like transactions, budgeting, and reporting, helping ensure accuracy and better decision-making.',
+    tags: ['Swift', 'SwiftUI', 'Financial'],
     image: NCGR,
   },
 ];
