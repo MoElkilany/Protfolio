@@ -9,7 +9,8 @@ const experiences = [
     description: 'Led development of mission-critical government mobile applications serving Saudi Arabian government agencies. Architected scalable solutions using modern iOS frameworks and best practices',
     highlights: [
       'NCGR (National Center for Government Resources) – Etimad Committees Module | Native iOS App',
-      'DGA (Digital Government Authority) | Native iOS App',
+      `DGA (Digital Government Authority) – Native iOS App
+    Developed a comprehensive government services application enabling thousands of government employees to complete critical tasks efficiently.`,
       `My MT App (Ministry of Tourism)
     Engineered employee task management application for the Saudi Arabian Ministry of Tourism | Native iOS App`,
       `SCISP (Saudi Center for International Strategic Partnerships)

@@ -17,7 +17,7 @@ const Skills = () => {
   ];
 
   const architectureTools = [
-    'Clean Architecture', 'MVVM', 'MVP', 'TCA', 'CI/CD', 'Fastlane', 'Git', 'Firebase', 'Agora', 'HealthKit', 'Google Maps'
+    'Clean Architecture', 'MVVM', 'MVP', 'CI/CD', 'Fastlane', 'Git', 'Firebase', 'Agora', 'HealthKit', 'Google Maps'
   ];
 
   const softSkills = [
