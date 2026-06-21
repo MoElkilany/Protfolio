@@ -6,14 +6,18 @@ const experiences = [
     title: 'Senior Mobile Engineer',
     company: 'Sure International Technology, Saudia Arabia',
     years: '4 years',
-    description: 'Leading the development of mission-critical mobile applications for Saudi government and enterprise clients. Architected and delivered production-ready apps with focus on security, performance, and user experience.',
+    description: 'Led development of mission-critical government mobile applications serving Saudi Arabian government agencies. Architected scalable solutions using modern iOS frameworks and best practices',
     highlights: [
-      'DGA (Digital Government Authority) - Official government employee app serving 50,000+ users',
-      'My MT App (Ministry of Tourism) - Employee portal with HealthKit integration and Apple Wallet passes',
-      'SCISP (Saudi Center for International Strategic Partnerships) - Enterprise resource management application',
-      'ZATCA (Zakat, Tax & Customs Authority) - Compliance and reporting platform',
-      'NCGR (National Center for Government Resources) - System app for Ministry of Finance',
-      'TGA (Transport General Authority) - Transportation authority application'
+      'NCGR (National Center for Government Resources) – Etimad Committees Module | Native iOS App',
+      'DGA (Digital Government Authority) | Native iOS App',
+      `My MT App (Ministry of Tourism)
+    Engineered employee task management application for the Saudi Arabian Ministry of Tourism | Native iOS App`,
+      `SCISP (Saudi Center for International Strategic Partnerships)
+    Built an informational application for the Saudi government to disseminate critical information | Native iOS App`,
+      `ZATCA (Tax & Customs Authority)
+    Developed a comprehensive conference management application for the Saudi Zakat, Tax and Customs Authority | Flutter App`,
+      `TGA Taxi & TGA Driver
+    Built a full-featured ride-hailing ecosystem with Uber-like functionality and real-time features | Flutter App`
     ],
     tags: ['SwiftUI', 'UIKit', 'MVVM', 'HealthKit', 'Apple Wallet', 'Flutter', 'Unit Testing', 'CI/CD'],
     isActive: true,

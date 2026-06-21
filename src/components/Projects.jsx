@@ -7,6 +7,8 @@ import ZATCA from '../assets/ZATCA.png';
 import NCGR from '../assets/NCGR.png';
 import Bazzarry from '../assets/Bazzarry.png';
 import Alrajhi from '../assets/alrajhi.png';
+import Sawa from '../assets/sawa.jpeg';
+import Haqiba from '../assets/haqiba.jpeg';
 
 const enterpriseProjects = [
   {
@@ -92,11 +94,35 @@ const publicProjects = [
     fullName: 'Alrajhi For Urban Projects',
     subtitle: 'Flutter',
     description: 'A modern mobile solution supporting urban development and project management workflows.',
-    tags: ['Flutter', 'iOS', 'Android'],
+    tags: ['Flutter', 'Android'],
     image: Alrajhi,
     appStore: 'https://apps.apple.com/eg/app/%D8%A7%D9%84%D8%B1%D8%A7%D8%AC%D8%AD%D9%8A/id6757990415',
     playStore: 'https://play.google.com/store/apps/details?id=com.alrajhi.realestate',
     country: 'Egypt',
+  },
+  {
+    id: 3,
+    title: 'حقيبة',
+    fullName: 'حقيبة للمعلمين',
+    subtitle: 'Flutter',
+    description: 'A comprehensive educational platform designed for teachers, enabling seamless classroom management, assignment distribution, and student engagement through an intuitive mobile experience.',
+    tags: ['Flutter', 'Android'],
+    image: Haqiba,
+    appStore: 'https://apps.apple.com/eg/app/%D8%AD%D9%82%D9%8A%D8%A8%D8%A9-%D9%84%D9%84%D9%85%D8%B9%D9%84%D9%85%D9%8A%D9%86/id6749434823',
+    playStore: 'https://play.google.com/store/apps/details?id=com.hakebaa.educare.pro&pli=1',
+    country: 'Kuwait',
+  },
+  {
+    id: 4,
+    title: 'Sawa Travel',
+    fullName: 'Sawa Travel',
+    subtitle: 'Flutter',
+    description: 'A modern travel companion app built with Flutter, offering seamless trip planning, booking, and exploration experiences across platforms.',
+    tags: ['Flutter', 'Android'],
+    image: Sawa,
+    appStore: 'https://apps.apple.com/eg/app/sawa-travel/id6754842453',
+    playStore: 'https://play.google.com/store/apps/details?id=com.sawa.travel&pcampaignid=web_share',
+    country: 'Kuwait',
   },
 ];
 
@@ -124,15 +150,19 @@ const ProjectCard = ({ project, isEnterprise }) => (
     }`}
   >
     <div className="relative h-56 overflow-hidden">
-      <img 
-        src={project.image} 
-        alt={project.title}
-        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-      />
+      {project.image ? (
+        <img 
+          src={project.image} 
+          alt={project.title}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+        />
+      ) : (
+        <div className={`w-full h-full bg-gradient-to-br ${project.gradient}`} />
+      )}
       <div className={`absolute inset-0 ${
         isEnterprise 
           ? 'bg-gradient-to-br from-black/60 via-black/50 to-black/60' 
-          : 'bg-gradient-to-br from-primary-500/80 via-primary-600/60 to-primary-700/80'
+          : 'bg-gradient-to-br from-black/60 via-black/50 to-black/60'
       }`} />
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIgZmlsbD0id2hpdGUiIGZpbGwtb3BhY2l0eT0iMC4xIi8+PC9zdmc+')] opacity-20" />
       
@@ -288,7 +318,7 @@ const Projects = () => {
             <div className="flex-1 h-px bg-gradient-to-r from-border to-transparent" />
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {publicProjects.map((project) => (
               <ProjectCard key={project.id} project={project} isEnterprise={false} />
             ))}

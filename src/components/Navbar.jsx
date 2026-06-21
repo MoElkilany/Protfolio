@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import cvPDF from '../assets/Mohamed Elkilany (Mobile Engineer).pdf';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -79,7 +80,7 @@ const Navbar = () => {
         </div>
 
         <a
-          href="/Mohamed Elkilany (Mobile Engineer).pdf"
+          href={cvPDF}
           download="Mohamed Elkilany (Mobile Engineer).pdf"
           className="hidden md:block px-5 py-2.5 bg-primary text-white text-sm font-semibold rounded-lg hover:bg-primaryHover transition-colors duration-200 glow-primary"
         >
@@ -118,7 +119,7 @@ const Navbar = () => {
                 </a>
               ))}
               <a
-                href="/Mohamed Elkilany (Mobile Engineer).pdf"
+                href={cvPDF}
                 download="Mohamed Elkilany (Mobile Engineer).pdf"
                 className="w-full px-5 py-2.5 bg-primary text-white text-sm font-semibold rounded-lg text-center block"
               >

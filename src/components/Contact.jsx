@@ -14,8 +14,8 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const { name, email, message } = formData;
-    const mailtoLink = `mailto:mohamedsayedelkilany@gmail.com?subject=Portfolio Contact from ${name}&body=Name: ${name}%0AEmail: ${email}%0A%0AMessage:%0A${message}`;
-    window.location.href = mailtoLink;
+    const whatsappMessage = `*Name:* ${name}%0A*Email:* ${email}%0A*Message:* ${message}`;
+    window.open(`https://wa.me/201009986028?text=${whatsappMessage}`, '_blank');
   };
 
   const handleChange = (e) => {
@@ -27,7 +27,7 @@ const Contact = () => {
 
   const contactInfo = [
     { icon: FaEnvelope, label: 'Email', value: 'mohamedsayedelkilany@gmail.com' },
-    { icon: FaPhone, label: 'Phone', value: '+201010012244' },
+    { icon: FaPhone, label: 'Phone', value: '+201009986028' },
     { icon: FaMapMarkerAlt, label: 'Location', value: 'New Cairo, Cairo, Egypt' },
   ];
 

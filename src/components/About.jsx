@@ -2,8 +2,8 @@ import { motion } from 'framer-motion';
 
 const About = () => {
   const achievements = [
-    { icon: 'emoji_events', text: 'ECPC 2018 Qualifications Round (37th Place)' },
-    { icon: 'lightbulb', text: "Vodafone's Innovation Hackathon (Top 10 among 230 ideas)" },
+    { icon: '🏆', text: 'ECPC 2018 Qualifications Round (37th Place)' },
+    { icon: '💡', text: "Vodafone's Innovation Hackathon (Top 10 among 230 ideas)" },
   ];
 
   const containerVariants = {
@@ -61,7 +61,7 @@ const About = () => {
                     transition={{ delay: index * 0.1 }}
                     className="flex items-center gap-3"
                   >
-                    <span className="material-symbols-outlined text-primary text-lg">{item.icon}</span>
+                    <span className="text-lg">{item.icon}</span>
                     <span className="text-textSecondary text-sm">{item.text}</span>
                   </motion.li>
                 ))}

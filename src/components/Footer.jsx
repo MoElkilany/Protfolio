@@ -74,9 +74,7 @@ const Footer = () => {
           <p className="text-textMuted text-sm">
             © {currentYear} Mohamed Elkilany. All rights reserved.
           </p>
-          <p className="text-textMuted text-sm">
-            Built with <span className="text-accent">React</span> & <span className="text-primary">Tailwind</span>
-          </p>
+
         </motion.div>
       </div>
     </footer>

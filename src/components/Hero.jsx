@@ -1,6 +1,7 @@
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { useState, useEffect, useRef } from 'react';
+import cvPDF from '../assets/Mohamed Elkilany (Mobile Engineer).pdf';
 
 const MagneticWrapper = ({ children, className = '' }) => {
   const ref = useRef(null);
@@ -192,7 +193,7 @@ const Hero = () => {
               className="px-8 py-3.5 border border-border text-textPrimary font-semibold rounded-lg hover:bg-surfaceElevated hover:border-textMuted transition-all duration-200"
             >
               <a
-                href="/Mohamed Elkilany (Mobile Engineer).pdf"
+                href={cvPDF}
                 target="_blank"
                 rel="noopener noreferrer"
               >
